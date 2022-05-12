@@ -1,31 +1,37 @@
-# Vue Basic
+## Live Healthy Web Client 
 
-[Azure Static Web Apps](https://docs.microsoft.com/azure/static-web-apps/overview) allows you to easily build [Vue.js](https://vuejs.org/) apps in minutes. Use this repo with the [Vue quickstart](https://docs.microsoft.com/azure/static-web-apps/getting-started?tabs=vue) to build and customize a new static site.
+### Introduction 
 
-## Project setup
+A simple web client for the Live Healthy app. 
 
-```bash
-npm install
-```
+### Setup Up 
 
-### Compiles and hot-reloads for development
+1) Clone this repository,
+2) The project is on VueJS. 
+3) GitHub actions are in *.github/workflows/azure-static-web-apps-thankful-grass-0f213b90f.yml* which allows automatic deployment of the web app whenever a commit is pushed (or a PR is merged in main branch).
 
-```bash
-npm run serve
-```
-
-### Compiles and minifies for production
 
 ```bash
-npm run build
+$ git clone https://github.com/Afreen89/LiveHealthyClient.git
+$ cd LiveHealthyClient 
+$ npm run serve 
 ```
 
-### Lints and fixes files
+Open localhost on 8080 port and see the hot-reloaded changaes on your local machine. Once you are happy with the changes, git commit the changes in the root directory and push them as follow: 
+
 
 ```bash
-npm run lint
+$ cd /path/to/project/root/
+$ git add .
+$ git commit -m "<type commit message here>"
+$ git push
 ```
 
-### Customize configuration
+### App Live Link
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+The static web app is live on the follwoing link: 
+
+```bash
+https://thankful-grass-0f213b90f.1.azurestaticapps.net/
+```
+
