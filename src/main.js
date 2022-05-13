@@ -13,6 +13,13 @@ import router from './router'
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 
+
+import VueApexCharts from 'vue-apexcharts'
+Vue.use(VueApexCharts)
+
+Vue.component('apexchart', VueApexCharts)
+
+
 new Vue({
   router,
   render: h => h(App)

@@ -17,7 +17,10 @@ const routes = [
   },
   {
     path: '/dashboard',
-    name: 'dasboard',
+    name: 'dashboard',
+    meta : {
+      auth: true
+    },
     component: () => import(/* webpackChunkName: "about" */ '@/views/DashboardView.vue')
   }
 ]

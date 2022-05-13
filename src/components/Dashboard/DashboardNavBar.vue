@@ -15,7 +15,7 @@
 
                 <b-navbar-nav class="ml-auto">
                     <b-nav-item   disable>
-                        Rachel Green
+                        {{ userName }}
                     </b-nav-item>
 
                     <b-nav-item v-b-tooltip.hover title="Edit your profile.">
@@ -36,6 +36,13 @@
 
 export default{
     name : "DashboardNavBar",
+
+    props : {
+        userName : {
+            type : String, 
+            default : ""
+        }
+    },
 
     data(){
         return {
