@@ -21,7 +21,7 @@
                     <b-nav-item v-b-tooltip.hover title="Edit your profile.">
                         Profile
                     </b-nav-item>
-                    <b-nav-item>
+                    <b-nav-item @click="$router.push({path : '/'})">
                         Sign Out
                     </b-nav-item>
                 </b-navbar-nav>
