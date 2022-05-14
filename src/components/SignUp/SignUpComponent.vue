@@ -91,8 +91,8 @@ export default {
     data() {
         return {
             showSpinner: false,
-            showError: true,
-            errorMsg: "Error",
+            showError: false,
+            errorMsg: "",
             firstName: "",
             lastName: "",
             age: null,

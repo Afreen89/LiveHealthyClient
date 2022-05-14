@@ -65,8 +65,8 @@ export default {
     data() {
         return {
             showSpinner : false,
-            email: "muhammadarshad0910@gmail.com",
-            password: "1234",
+            email: "",
+            password: "",
             showError: false,
             errorMsg: "",
 
@@ -78,7 +78,7 @@ export default {
             this.showSpinner = true
             if (this.email !== "" && this.password !== "") {
                 let response = await this.handle_sign_in_request();
-                console.log("Sign In Response: ", response)
+                // console.log("Sign In Response: ", response)
                 if (response.data.error == 0) {
                     let data = response.data.data
                     this.$router.push({ 
