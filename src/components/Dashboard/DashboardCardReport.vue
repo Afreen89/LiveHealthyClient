@@ -2,12 +2,16 @@
 
     <div>
 
-        <b-card class="mb-2" style="width: 35rem;">
+        <b-card class="mb-2" style="width: 27rem; ">
 
             <b-card-header header-class="bg-white border border-0 m-0 p-0">
                 <div>
                     <h5>
                         {{ headerTitle }}
+                        <span v-if="units.length > 0">
+
+                            ({{ units }})
+                        </span>
                         <div class="float-right" v-b-tooltip.hover title="Show tabular form">
                             <b-icon class="float-right" v-if="showGraph" icon="bar-chart-line"
                                 @click="showGraph = !showGraph" />
@@ -24,42 +28,20 @@
 
                 <div>
                     <div>
-                        <apexchart  type="line" :options="options" :series="series"></apexchart>
+                        <apexchart :ref="'chart-' + headerTitle" type="line" :options="options" :series="series">
+                        </apexchart>
                     </div>
                 </div>
 
                 <div v-if="!showGraph">
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <b-table striped hover :items="this.series[0].data" :fields="tableFields" responsive="sm"
+                        sticky-header borderless small>
+
+                        <template #cell(x)="data">
+                            <span>  {{data.item.x.toLocaleDateString("en-US") }}</span>
+                        </template>
+                    </b-table>
 
                 </div>
 
@@ -79,12 +61,15 @@
 <script>
 
 
+const axios = require('axios')
+
 export default {
     name: "DashboardCardReport",
 
     props: {
-        data: {
-            type: Array
+        userProfile: {
+            type: Object,
+            default: function () { return {} },
         },
 
         textBtn: {
@@ -97,29 +82,93 @@ export default {
             type: String,
             default: "",
             required: true
+        },
+
+        units: {
+            type: String,
+            default: ""
+        },
+        dataKey: {
+            type: String,
+            required: false,
+            default: 'pBloodPressure'
+
         }
     },
 
     data() {
         return {
-            showGraph: true,
+            userData: [],
+            tableFields: [
+                { key: 'x', text: "Date/Time", sortable: true },
+                { key: 'y', text: "Value", sortable: true },
+            ],
+
+            showGraph: false,
             options: {
-                noData : {text : "No data is found"},
                 chart: {
                     id: 'vuechart-example',
-                    height : "auto",
-                    width : "auto"
+                    height: "auto",
+                    width: "auto"
+                },
+                labbel: {
+
                 },
                 xaxis: {
-                    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+                    type: 'datetime',
+                    tickPlacement: 'between',
+                    labels: {
+                        format: 'm:ss',
+                    }
                 }
             },
             series: [{
-                name: 'series-1',
-                data: [30, 40, 45, 50, 49, 60, 70, 91]
+                name: this.headerTitle,
+                data: []
             }]
         }
     },
+
+    mounted() {
+        this.handle_initial_task()
+    },
+
+    methods: {
+        handle_data_formatting: function () {
+            let _now = new Date().getTime()
+            this.userData.forEach((item, count) => {
+                this.series[0].data.push({ x: new Date(count * 1000 + _now), y: item[this.dataKey].toFixed(1) })
+            })
+
+            this.$refs['chart-' + this.headerTitle].updateSeries(this.series)
+        },
+
+        handle_initial_task: async function () {
+
+            if (this.userProfile !== {}) {
+                let response = await this.handle_retrieve_user_data(this.userProfile.pEmail, this.userProfile.pPassword);
+                if (response.data.error === 0) {
+                    this.userData = response.data.data;
+                    this.handle_data_formatting()
+                }
+            }
+        },
+
+        handle_retrieve_user_data: async function (email, password) {
+
+            let dataApi = "https://livehealthyfunctions.azurewebsites.net/api/getuserdata?code=KXC8gCm7QJcqG4GYlfwzdC63YhIgnn52nYh_XCN4P47IAzFuo9pkrQ%3D%3D&email=" + email + "&password=" + password;
+            let response = await axios({
+                method: "get",
+                url: dataApi,
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-Type": "application/json; charset=utf-8",
+                },
+            })
+
+            return response
+        }
+    }
 
 }
 

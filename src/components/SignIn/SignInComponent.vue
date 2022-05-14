@@ -57,8 +57,8 @@ export default {
     data() {
         return {
             showSpinner : false,
-            email: "",
-            password: "",
+            email: "muhammadarshad0910@gmail.com",
+            password: "1234",
             showError: false,
             errorMsg: "",
 
