@@ -23,7 +23,7 @@
                     {{ errorMsg }}
                 </span>
 
-                <a class="float-right mt-1 text-secondary ">
+                <a class="float-right mt-1 text-secondary" @click="$bvModal.show('change-password-modal')">
                     <span class="text-secondary">
                         Forgot password?
                     </span>
@@ -42,6 +42,7 @@
 
         </b-card>
 
+        <ChangePasswordRequestVue/>
     </div>
 
 </template>
@@ -52,8 +53,15 @@
 
 const axios = require('axios')
 
+import ChangePasswordRequestVue from '@/components/EditProfile/ChangePasswordRequest.vue'
+
 export default {
     name: "SignInComponent",
+
+    components : {
+        ChangePasswordRequestVue,
+    },
+
     data() {
         return {
             showSpinner : false,
