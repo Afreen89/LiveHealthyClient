@@ -70,7 +70,7 @@ export default {
             this.showSpinner = true
             if (this.email !== "" && this.password !== "") {
                 let response = await this.handle_sign_in_request();
-
+                console.log("Sign In Response: ", response)
                 if (response.data.error == 0) {
                     let data = response.data.data
                     this.$router.push({ 
