@@ -63,6 +63,9 @@
 
 const axios = require('axios')
 
+const {GetUserDataApi} = require("@/api/api")
+
+
 export default {
     name: "DashboardCardReport",
 
@@ -156,7 +159,7 @@ export default {
 
         handle_retrieve_user_data: async function (email, password) {
 
-            let dataApi = "https://livehealthyfunctions.azurewebsites.net/api/getuserdata?code=KXC8gCm7QJcqG4GYlfwzdC63YhIgnn52nYh_XCN4P47IAzFuo9pkrQ%3D%3D&email=" + email + "&password=" + password;
+            let dataApi = GetUserDataApi + "&email=" + email + "&password=" + password;
             let response = await axios({
                 method: "get",
                 url: dataApi,
@@ -166,6 +169,7 @@ export default {
                 },
             })
 
+            console.log(response)
             return response
         }
     }

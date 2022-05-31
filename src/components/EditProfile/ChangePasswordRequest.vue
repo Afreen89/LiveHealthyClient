@@ -44,6 +44,8 @@
 
 const axios = require('axios')
 
+const {EditUserProfileApi} = require("@/api/api")
+
 export default {
     name: "ChangePasswordRequesT",
 
@@ -74,11 +76,10 @@ export default {
 
         handle_is_info_correct : async function() {
 
-            let retrievePassApi = "https://livehealthyfunctions.azurewebsites.net/api/retrieveuserpassword?code=ifoYASmETYRzYpGUcogAA-1zBjWjfcz36WOgnUi2nneqAzFuSfecEA%3D%3D"// + this.email + "&firstName=" + this.firstName + "&lastName=" + this.lastName;
             let request =  "&email=" + this.email + "&firstName=" + this.firstName + "&lastName=" + this.lastName
             let response = await axios({
                 method: "get",
-                url: retrievePassApi + request,
+                url: EditUserProfileApi + request,
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json; charset=utf-8",

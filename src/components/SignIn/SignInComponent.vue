@@ -53,6 +53,8 @@
 
 const axios = require('axios')
 
+const {SignInApi} = require("@/api/api")
+
 import ChangePasswordRequestVue from '@/components/EditProfile/ChangePasswordRequest.vue'
 
 export default {
@@ -71,6 +73,10 @@ export default {
             errorMsg: "",
 
         }
+    },  
+
+    mounted(){
+        console.log( SignInApi + "&email=" + this.email + "&password=" + this.password )
     },
 
     methods: {
@@ -99,7 +105,8 @@ export default {
 
         handle_sign_in_request: async function () {
 
-            let signInApi = "https://livehealthyfunctions.azurewebsites.net/api/signinfunction?code=mufxVRh3gEVnXk1BaNnp5L5zi0Xiv3dKn46058LRoPvbAzFuf06ECA%3D%3D&email=" + this.email + "&password=" + this.password;
+            let signInApi = SignInApi + "&email=" + this.email + "&password=" + this.password;
+            console.log( signInApi )
             let response = await axios({
                 method: "get",
                 url: signInApi,

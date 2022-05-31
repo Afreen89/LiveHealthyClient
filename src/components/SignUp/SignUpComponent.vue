@@ -86,6 +86,8 @@
 
 const axios = require('axios')
 
+const {SignUpApi} = require("@/api/api")
+
 export default {
     name: "SignUpComponent",
     data() {
@@ -146,7 +148,7 @@ export default {
 
         handle_user_signup_request: async function () {
 
-            let signInApi = "https://livehealthyfunctions.azurewebsites.net/api/signupfunction?code=k8A0fs1VcrY_tCFDqtbZ0Kmdqb-GMFpBlIfy0jjPJrHkAzFu_wrdgQ%3D%3D" + "&firstName=" + this.firstName + "&lastName=" + this.lastName + "&email=" + this.email + "&password=" + this.password + "&age=" + this.age + "&gender=" + this.gender
+            let signInApi = SignUpApi + "&firstName=" + this.firstName + "&lastName=" + this.lastName + "&email=" + this.email + "&password=" + this.password + "&age=" + this.age + "&gender=" + this.gender
             let response = await axios({
                 method: "post",
                 url: signInApi,
