@@ -74,10 +74,7 @@ export default {
 
         }
     },  
-
-    mounted(){
-        console.log( SignInApi + "&email=" + this.email + "&password=" + this.password )
-    },
+ 
 
     methods: {
         handle_user_signin: async function () {
