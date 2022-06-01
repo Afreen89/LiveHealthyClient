@@ -12,7 +12,7 @@ A simple web client for the Live Healthy app.
 
 
 ```bash
-$ git clone https://github.com/Afreen89/LiveHealthyClient.git
+$ git clone -b second-subscription https://github.com/Afreen89/LiveHealthyClient.git
 $ cd LiveHealthyClient 
 $ npm run serve 
 ```
@@ -32,6 +32,12 @@ $ git push
 The static web app is live on the follwoing link: 
 
 ```bash
-https://thankful-grass-0f213b90f.1.azurestaticapps.net/
+https://happy-wave-00ad37d03.1.azurestaticapps.net/
 ```
 
+### GitHub Actions 
+
+Once you push a new commit (to second-subscription branch), go to the Actions to see the automatic deployment status. If the last deployment is green, it means the changes are live. If it is red, there is some error. If it is orange moving circle, please wait as the deployment is in process. 
+
+
+Usually, test cases are written before automatic deployment. However, I have avoided it for this assignment.
